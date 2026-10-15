@@ -7,18 +7,13 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script type="text/javascript">
-      // Инициализация EmailJS (замените 'YOUR_PUBLIC_KEY' на ваш реальный публичный ключ)
       (function(){
       emailjs.init({
         publicKey: "ZwPWZuoiCzSLdrAjI",
     });
     })();
   </script>
-  <script type="text/javascript" src="https://cdn.emailjs.com/sdk/3.2.0/email.min.js"></script>
-
-</script>
   <style>
-    /* Стили в голубых тонах */
     body {
       margin: 0;
       padding: 20px;
@@ -276,13 +271,18 @@
         message: messageText
       };
     
-      emailjs.send('service_a96owjk', 'template_9sku5yf', templateParams)
+      emailjs.send('service_2eznu7l', 'template_9sku5yf', templateParams)
         .then(function(response) {
           console.log('SUCCESS!', response.status, response.text);
           document.getElementById('surveyForm').style.display = 'none';
           document.getElementById('feedbackMessage').style.display = 'block';
         }, function(error) {
-          console.log('FAILED...', error);
+          console.error('FAILED to send email through EmailJS:', {
+            status: error?.status,
+            text: error?.text,
+            message: error?.message,
+            error
+          });
           alert('Произошла ошибка при отправке. Попробуйте позже.');
         });
     });
